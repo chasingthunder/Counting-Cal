@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+   
+    <title>Document</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Epic Counting Calories</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li class="active"><a href="/countingCal">alimentos diários</a></li>
+          <li><a href="#">calorias concluídas</a></li>
+          <li><a href="#">usuários</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="container">
+      
+      <h2>Cadastrar Alimento</h2>
+
+      <div class="card">
+        <form action="/countingCal" method="post" th:object="${counting}">
+            <div class="card-content">
+                <div class="input-field">
+                    <input 
+                        type="text" 
+                        th:field="*{nome}"
+                        th:classappend="${#fields.hasErrors('nome')} ? invalid"
+                    >
+                    <label for="title">Nome</label>
+                    <span class="helper-text red-text" th:errors="*{nome}"></span>
+                </div>
+                
+                <div class="input-field">
+                  <input 
+                      type="text" 
+                      th:field="*{descricao}"
+                      th:classappend="${#fields.hasErrors('descricao')} ? invalid"
+                  >
+                  <label for="descricao">Descrição</label>
+                  <span class="helper-text red-text" th:errors="*{descricao}"></span>
+              </div>
+
+              <div class="input-field">
+                <input 
+                    type="number" 
+                    th:field="*{qtd}"
+                    th:classappend="${#fields.hasErrors('qtd')} ? invalid"
+                >
+                <label for="qtd">Qtd</label>
+                <span class="helper-text red-text" th:errors="*{qtd}"></span>
+            </div>
+
+            <div class="input-field">
+              <input 
+                  type="number" 
+                  th:field="*{calorias}"
+                  th:classappend="${#fields.hasErrors('calorias')} ? invalid"
+              >
+              <label for="calorias">Calorias</label>
+              <span class="helper-text red-text" th:errors="*{calorias}"></span>
+          </div>
+                
+      
+            </div>
+            <div class="card-action right-align">
+                <a href="/countingCal" class="btn grey">
+                    <i class="material-icons left">chevron_left</i>
+                    cancelar
+                </a>
+                <button class="btn purple">
+                    <i class="material-icons left">check</i>
+                    cadastrar
+                </button>
+            </div>
+        </form>
+    </div>
+        
+    </main>
+    
+
+  </body>
+</html>
