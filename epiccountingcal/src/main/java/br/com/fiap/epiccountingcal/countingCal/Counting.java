@@ -20,7 +20,7 @@ public class Counting {
     @NotBlank
     String nome;
 
-    @Size(min = 5)
+    @Size(min = 5, message = "{countingCal.description.size}")
     String descricao;
 
     @Min(1) @Max(100)

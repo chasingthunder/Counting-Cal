@@ -1,6 +1,10 @@
 package br.com.fiap.epiccountingcal.countingCal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,19 +23,24 @@ public class CountingController {
     @Autowired
     CountingService service;
 
+     @Autowired
+     MessageSource messages;
+
 
     @GetMapping
-    public String index(Model model){
+    public String index(Model model, @AuthenticationPrincipal OAuth2User user){
+        model.addAttribute("username", user.getAttribute("name"));
+        model.addAttribute("avatar_url", user.getAttribute("avatar_url"));
         model.addAttribute("countingCal", service.findAll());
-        return "/countingcal/index";
+        return "/countingCal/index";
     }
     
      @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id, RedirectAttributes redirect){
         if(service.delete(id)){
-            redirect.addFlashAttribute("success", "Alimento apagado com sucesso");
+            redirect.addFlashAttribute("success", getMessage("countingCal.delete.success"));
         }else{
-            redirect.addFlashAttribute("error", "Alimento não encontrado");
+            redirect.addFlashAttribute("error", getMessage("countingCal.notFound"));
         }
         return "redirect:/countingCal";
     }
@@ -50,4 +59,9 @@ public class CountingController {
         redirect.addFlashAttribute("success", "Alimento adicionado com sucesso");
         return "redirect:/countingCal";
     }
+
+    private String getMessage(String code){
+        return messages.getMessage(code, null, LocaleContextHolder.getLocale());
+    }
+
 }

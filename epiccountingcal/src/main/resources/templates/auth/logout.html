@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <title>Counting Cal</title>
+</head>
+<body>
+
+    <main class="container center">
+
+        
+        <h5><p>Certeza que deseja sair?</p></h5>
+
+        <form th:action="${'/logout'}" method="post">
+
+        <a href="/countingCal" class="btn grey">
+            <i class="material-icons left">chevron_left</i>
+            cancelar
+        </a>
+
+        <button class="btn">Sim, desejo sair!</button>
+
+    </form>
+
+
+
+    </main>
+   
+    
+</body>
+</html>

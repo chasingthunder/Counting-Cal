@@ -1,11 +1,19 @@
 <!DOCTYPE html>
-<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-   
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"/>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+      <link rel="stylesheet" href="style.css">
+
     <title>Document</title>
   </head>
   <body>
@@ -13,33 +21,64 @@
       <div class="nav-wrapper">
         <a href="#" class="brand-logo">Epic Counting Calories</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li class="active"><a href="/countingCal">alimentos diários</a></li>
-          <li><a href="#">calorias concluídas</a></li>
-          <li><a href="#">usuários</a></li>
+          <li class="active"><a href="/countingCal" th:text="#{countingCal.dailyFoods}"></a></li>
+          <li><a href="#" th:text="#{countingCal.caloriesCompleted}"></a></li>
+          <li><a href="#" th:text="#{users}"></a></li>
+          <li>
+            <!-- Dropdown Trigger -->
+            <a class="dropdown-trigger" href="#" data-target="dropdown1">
+              <img th:src="${avatar_url}" alt="avatar usuário" class="avatar">
+            </a>
+
+            <!-- Dropdown Structure -->
+            <ul id="dropdown1" class="dropdown-content">
+              <li><span th:text="${username}"></li>
+      
+              <li class="divider" tabindex="-1"></li>
+          
+             <li> <a href="/logout"><i class="material-icons">logout</i>sair</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </div>
     </nav>
 
+
     <main class="container">
-      <div class="card-panel purple lighten-2" th:if="${success}" th:text="${success}"></div>
-      <div class="card-panel red white-text" th:if="${error}" th:text="${error}"></div>
+      <div
+        class="card-panel purple lighten-2"
+        th:if="${success}"
+        th:text="${success}"
+      ></div>
+      <div
+        class="card-panel red white-text"
+        th:if="${error}"
+        th:text="${error}"
+      ></div>
       <h2>Lista de calorias diárias</h2>
 
       <div class="row">
         <div class="col s12 m6 l4" th:each="counting : ${countingCal}">
           <div class="card pink darken-1">
             <div class="card-content white-text">
-              
               <span class="card-title" th:text="${counting.nome}"></span>
-               <p th:text="${counting.descricao}"></p>
-               qtd:<p th:text="${counting.qtd}"></p> 
-              <span data-badge-caption="calorias" class="badge pink white-text" th:text="${counting.calorias}"></span>
+              <p th:text="${counting.descricao}"></p>
+              qtd:
+              <p th:text="${counting.qtd}"></p>
+              <span
+                data-badge-caption="calorias"
+                class="badge pink white-text"
+                th:text="${counting.calorias}"
+              ></span>
             </div>
             <div class="card-action">
-              <a th:href="${'/countingCal/delete/' + counting.id}" class="btn red">
+              <a
+                th:href="${'/countingCal/delete/' + counting.id}"
+                class="btn red"
+              >
                 <i class="material-icons">delete</i>
-            </a>
-              
+              </a>
             </div>
           </div>
         </div>
@@ -50,9 +89,17 @@
       <a href="/countingCal/new" class="btn-floating btn-large purple">
         <i class="large material-icons">add</i>
       </a>
-  
     </div>
-          
-
   </body>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.dropdown-trigger');
+      const options = {
+            constrainWidth: false,
+            coverTrigger: false
+        }
+      var instances = M.Dropdown.init(elems, options);
+    });
+  </script>
 </html>
