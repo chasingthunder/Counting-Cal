@@ -1,9 +1,11 @@
 package br.com.fiap.epiccountingcal.countingCal;
 
+import br.com.fiap.epiccountingcal.user.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -26,8 +28,10 @@ public class Counting {
     @Min(1) @Max(100)
     Integer qtd;
 
-    @Min(0) @Max(1000)
+    @Min(1) @Max(1000)
     Integer calorias;
 
+    @ManyToOne
+    User user;
     
 }

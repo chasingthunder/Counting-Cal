@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-   
-    <title>Document</title>
-  </head>
+  <head th:replace="~{_template :: head('cadastrar alimento')}"></head>
   <body>
     <nav>
       <div class="nav-wrapper">
@@ -16,7 +8,7 @@
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li class="active"><a href="/countingCal">alimentos diários</a></li>
           <li><a href="#">calorias concluídas</a></li>
-          <li><a href="#">usuários</a></li>
+          <li><a href="#">usuário</a></li>
         </ul>
       </div>
     </nav>

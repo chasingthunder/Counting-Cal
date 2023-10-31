@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.fiap.epiccountingcal.user.User;
 import jakarta.validation.Valid;
 
 @Controller
@@ -29,7 +30,7 @@ public class CountingController {
 
     @GetMapping
     public String index(Model model, @AuthenticationPrincipal OAuth2User user){
-        model.addAttribute("username", user.getAttribute("name"));
+        model.addAttribute("username", user.getAttribute("nome"));
         model.addAttribute("avatar_url", user.getAttribute("avatar_url"));
         model.addAttribute("countingCal", service.findAll());
         return "/countingCal/index";
@@ -62,6 +63,24 @@ public class CountingController {
 
     private String getMessage(String code){
         return messages.getMessage(code, null, LocaleContextHolder.getLocale());
+    }
+
+    @GetMapping("dec/{id}")
+    public String decrement(@PathVariable Long id){
+        service.decrement(id);
+        return "redirect:/countingCal";
+    }
+
+    @GetMapping("inc/{id}")
+    public String increment(@PathVariable Long id){
+        service.increment(id);
+        return "redirect:/countingCal";
+    }
+
+    @GetMapping("catch/{id}")
+    public String catchCounting(@PathVariable Long id, @AuthenticationPrincipal OAuth2User user){
+        service.catchCounting(id, User.convert(user));
+        return "redirect:/countingCal";
     }
 
 }
