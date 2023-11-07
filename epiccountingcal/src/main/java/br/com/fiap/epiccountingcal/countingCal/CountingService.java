@@ -63,6 +63,8 @@ public class CountingService {
 
         repository.save(counting);
     }
+    public void catchCounting(Long id, User convert) {
+    }
 
 
 
